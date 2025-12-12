@@ -5,7 +5,7 @@
 export ZSH="$HOME/.oh-my-zsh"
 export PATH="$HOME/dev-tools/bin:$PATH"
 
-for alias_file in ./aliases/*.zsh; do
+for alias_file in ~/dotfiles/zsh/aliases/*.zsh; do
     source "$alias_file"
 done
 

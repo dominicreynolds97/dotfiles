@@ -1,45 +1,19 @@
 # Git aliases and functions
 
 # Git info commands
+alias ga="git add"
+alias gaa="git add --all"
+alias gc="git commit"
+alias gb="git branch"
 alias gs="git status"
 alias gd="git diff"
+alias gr="git rebase"
+alias gp="git push"
+alias gu="git pull"
+alias gk="git checkout"
 alias gl="git log --oneline --graph --decorate -20"
-
-# Add and commit
-alias gaa="git add --all"
-
-function ga() {
-    git add "$*"
-}
-
-function gcq() {
-    git add --all
-    git commit -m "$*"
-}
-
-function gc() {
-    git commit -m "$*"
-}
-
-# Branch and checkout
-alias gb="git branch"
-alias gcol="git checkout -"
-
-function gco() {
-    git checkout "$@"
-}
-
-function gcb() {
-    git checkout -b "$@"
-}
-
-# Reset
-alias grs1="git reset --soft HEAD~1"
-alias grh1="git reset --hard HEAD~1"
-
-# Push and pull
-alias gph="git push"
-alias gpl="git pull"
+alias grs="git reset --soft HEAD~1"
+alias grh="git reset --hard HEAD~1"
 
 # Sync fork with upstream
 function gsyncu() {
@@ -59,5 +33,3 @@ function gsync() {
     git merge "$1"/"$2"
     git push origin
 }
-
-alias='npm run dev''npm run dev'
