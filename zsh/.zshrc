@@ -105,3 +105,5 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias air='$(go env GOPATH)/bin/air'
+
+eval "$(zoxide init zsh)"
