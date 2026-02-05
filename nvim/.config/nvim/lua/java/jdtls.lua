@@ -78,7 +78,7 @@ local function setup_jdtls()
   config.init_options.bundles = bundles
 
   jdtls.start_or_attach(config)
-  local keymap = vim.opts.keymap.set
+  local keymap = vim.keymap.set
 
   -- Organize imports
   keymap("n", "<leader>oi", jdtls.organize_imports, { desc = "Organize imports" })
@@ -90,13 +90,13 @@ local function setup_jdtls()
   keymap("v", "<leader>ev", [[<ESC><CMD>lua require('jdtls').extract_variable(true)<CR>]], { desc = "Extract variable" })
 
   -- Extract constant
-  keymap("n", "<leader>ev", jdtls.extract_constant, { desc = "Extract constant" })
+  keymap("n", "<leader>ec", jdtls.extract_constant, { desc = "Extract constant" })
 
   -- Extract constant (visual)
-  keymap("v", "<leader>ev", [[<ESC><CMD>lua require('jdtls').extract_constant(true)<CR>]], { desc = "Extract constant" })
+  keymap("v", "<leader>ec", [[<ESC><CMD>lua require('jdtls').extract_constant(true)<CR>]], { desc = "Extract constant" })
 
   -- Extract method (visual)
-  keymap("v", "<leader>ev", [[<ESC><CMD>lua require('jdtls').extract_method(true)<CR>]], { desc = "Extract method" })
+  keymap("v", "<leader>em", [[<ESC><CMD>lua require('jdtls').extract_method(true)<CR>]], { desc = "Extract method" })
 
   -- Update project configuration
   keymap("n", "<leader>up", jdtls.update_projects_config, { desc = "Update project" })

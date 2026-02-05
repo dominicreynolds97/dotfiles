@@ -64,8 +64,6 @@ return {
       })
 
       telescope.load_extension("fzf")
-
-      -- TODO - Keybindings
     end,
   }
 }

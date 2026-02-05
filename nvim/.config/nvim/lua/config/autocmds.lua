@@ -61,7 +61,6 @@ autocmd("CursorHold", {
       source = "always",
       prefix = " ",
     }
-    vim.diagnostic.open_float(nil, opts)
   end,
 })
 

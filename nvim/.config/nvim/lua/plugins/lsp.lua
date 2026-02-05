@@ -74,7 +74,7 @@ return {
           keymap("n", "<leader>rn", vim.lsp.buf.rename, opts_with_desc("Rename symbol"))
 
           -- Code actions
-          keymap({ "n", "i" }, "<leader>ca", vim.lsp.buf.code_action, opts_with_desc("Code actions"))
+          keymap("n", "<leader>ca", vim.lsp.buf.code_action, opts_with_desc("Code actions"))
 
           -- Format buffer
           keymap("n", "<leader>fb", function()
