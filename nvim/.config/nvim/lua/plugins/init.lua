@@ -5,6 +5,7 @@ require("lazy").setup({
   { import = "plugins.testing" },
   { import = "plugins.navigation" },
   { import = "plugins.ui" },
+  { import = "plugins.git" },
 
   {
     "nvim-treesitter/nvim-treesitter",
@@ -38,16 +39,6 @@ require("lazy").setup({
     keys = { "gc", "gb" },
     config = function()
       require("Comment").setup()
-    end,
-  },
-
-  {
-    "lewis6991/gitsigns.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    config = function()
-      require("gitsigns").setup({
-        -- TODO - configure visual indicators for git changes
-      })
     end,
   },
 

@@ -17,14 +17,8 @@ return {
           documentation = cmp.config.window.bordered(),
         },
 
-        --TODO
         mapping = cmp.mapping.preset.insert({
-          -- - Confirm selection (accept completion)
-          -- - Navigate next/previous item
-          -- - Scroll docs up/down
-          -- - Close completion menu
-          -- - Trigger completion manually
-          -- - Jump to next/previous snippet placeholder
+          ["<leader>y"] = cmp.mapping.confirm({ select = true })
         }),
 
         sources = cmp.config.sources({
