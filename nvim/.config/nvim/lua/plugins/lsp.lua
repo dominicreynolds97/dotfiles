@@ -45,7 +45,6 @@ return {
       vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(args)
           local bufnr = args.buf
-          local opts = { buffer = bufnr }
           local opts_with_desc = function(description)
             return {
               buffer = bufnr,
@@ -66,14 +65,31 @@ return {
           keymap("n", "gr", vim.lsp.buf.references, opts_with_desc("Find references"))
 
           -- Hover documentation
-          keymap("n", "<leader>d", vim.lsp.buf.hover, opts_with_desc("Hover documentation"))
+          keymap("n", "<leader>h", vim.lsp.buf.hover, opts_with_desc("Hover documentation"))
 
           -- Signature help
+          keymap("n", "<leader>sh", vim.lsp.buf.signature_help, opts_with_desc("Signature Help"))
+
           -- Rename symbol
+          keymap("n", "<leader>rn", vim.lsp.buf.rename, opts_with_desc("Rename symbol"))
+
           -- Code actions
+          keymap({ "n", "i" }, "<leader>ca", vim.lsp.buf.code_action, opts_with_desc("Code actions"))
+
           -- Format buffer
+          keymap("n", "<leader>fb", function()
+            vim.lsp.buf.format({ async = true })
+          end, opts_with_desc("Format buffer"))
+
           -- Show line diagnostics
+          keymap("n", "<leader>ds", vim.diagnostic.open_float, opts_with_desc("Show line diagnostics"))
+
           -- Go to next/previous diagnostic
+          keymap("n", "<leader>dn", vim.diagnostic.goto_next, opts_with_desc("Next diagnostic"))
+          keymap("n", "<leader>dp", vim.diagnostic.goto_prev, opts_with_desc("Prev diagnostic"))
+
+          -- Type definition
+          keymap("n", "<leader>td", vim.lsp.buf.type_definition, opts_with_desc("Type definition"))
         end,
       })
     end,
