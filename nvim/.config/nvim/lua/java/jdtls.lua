@@ -78,19 +78,34 @@ local function setup_jdtls()
   config.init_options.bundles = bundles
 
   jdtls.start_or_attach(config)
+  local keymap = vim.opts.keymap.set
 
-  -- TODO
-  -- Java-specific keybindings to map:
-  -- - Organize imports
-  -- - Extract variable
-  -- - Extract variable (visual)
-  -- - Extract constant
-  -- - Extract constant (visual)
-  -- - Extract method (visual)
-  -- - Update project configuration
-  -- - Run main class
-  -- - Test class
-  -- - Test nearest method
+  -- Organize imports
+  keymap("n", "<leader>oi", jdtls.organize_imports, { desc = "Organize imports" })
+
+  -- Extract variable
+  keymap("n", "<leader>ev", jdtls.extract_variable, { desc = "Extract variable" })
+
+  -- Extract variable (visual)
+  keymap("v", "<leader>ev", [[<ESC><CMD>lua require('jdtls').extract_variable(true)<CR>]], { desc = "Extract variable" })
+
+  -- Extract constant
+  keymap("n", "<leader>ev", jdtls.extract_constant, { desc = "Extract constant" })
+
+  -- Extract constant (visual)
+  keymap("v", "<leader>ev", [[<ESC><CMD>lua require('jdtls').extract_constant(true)<CR>]], { desc = "Extract constant" })
+
+  -- Extract method (visual)
+  keymap("v", "<leader>ev", [[<ESC><CMD>lua require('jdtls').extract_method(true)<CR>]], { desc = "Extract method" })
+
+  -- Update project configuration
+  keymap("n", "<leader>up", jdtls.update_projects_config, { desc = "Update project" })
+
+  -- Test class
+  keymap("n", "<leader>tc", jdtls.test_class, { desc = "Test class" })
+
+  -- Test nearest method
+  keymap("n", "<leader>tm", jdtls.test_nearest_method, { desc = "Test nearest method" })
 end
 
 vim.api.nvim_create_autocmd("FileType", {
