@@ -16,6 +16,7 @@ require("lazy").setup({
           "java",
           "lua",
           "vim",
+          "node",
           "markdown",
           "json",
           "jaml",
