@@ -1,5 +1,3 @@
-local keymap = vim.keymap.set
-
 return {
   {
     "williamboman/mason.nvim",
@@ -51,6 +49,8 @@ return {
               desc = description,
             }
           end
+
+          local keymap = vim.keymap.set
 
           -- Go to definition
           keymap("n", "gd", vim.lsp.buf.definition, opts_with_desc("Go to definition"))

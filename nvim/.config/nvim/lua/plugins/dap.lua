@@ -46,7 +46,7 @@ return {
       -- KEYMAPPING
       -- =============================================================================================================
 
-      local keymap = vim.opt.keymap.set
+      local keymap = vim.keymap.set
 
       -- Continue/Start debugging
       keymap("n", "<leader>dc", dap.continue, { desc = "Debug: Start/Continue" })
@@ -72,7 +72,7 @@ return {
       keymap("n", "<leader>dx", dap.clear_breakpoints, { desc = "Debug: Clear breakpoints" })
 
       -- Toggle DAP UI
-      keymap("n", "<leader>du", require("dapup").toggle, { desc = "Debug: Toggle UI" })
+      keymap("n", "<leader>du", require("dapui").toggle, { desc = "Debug: Toggle UI" })
 
       -- Open REPL
       keymap("n", "<leader>do", dap.repl.open, { desc = "Debug: Open REPL" })
