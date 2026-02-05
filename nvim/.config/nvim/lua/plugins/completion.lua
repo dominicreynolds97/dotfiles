@@ -18,7 +18,26 @@ return {
         },
 
         mapping = cmp.mapping.preset.insert({
-          ["<leader>y"] = cmp.mapping.confirm({ select = true })
+          -- Confirm selection
+          ["<A-y>"] = cmp.mapping.confirm({ select = true }),
+
+          -- Navigate next line
+          ["<A-n>"] = cmp.mapping.select_next_item(),
+
+          -- Navigate prev line
+          ["<A-p>"] = cmp.mapping.select_prev_item(),
+
+          -- Scroll docs down
+          ["<A-j>"] = cmp.mapping.scroll_docs(4),
+
+          -- Scroll docs up
+          ["<A-k>"] = cmp.mapping.scroll_docs(-4),
+
+          -- Abort/Alose menu
+          ["<A-x>"] = cmp.mapping.abort(),
+
+          -- Trigger completion manually
+          ["<A-c>"] = cmp.mapping.complete(),
         }),
 
         sources = cmp.config.sources({
