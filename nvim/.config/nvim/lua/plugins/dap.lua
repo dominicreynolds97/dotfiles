@@ -42,17 +42,50 @@ return {
         text = "→", texthl = "DapStopped",
       })
 
-      -- Keybindings to map:
-      -- - Continue/Start debugging
-      -- - Step over
-      -- - Step into
-      -- - Step out
-      -- - Toggle breakpoint
-      -- - Set conditional breakpoint
-      -- - Clear all breakpoints
-      -- - Open REPL
-      -- - Run last debug configuration
-      -- - Terminate debug session
+      -- =============================================================================================================
+      -- KEYMAPPING
+      -- =============================================================================================================
+
+      local keymap = vim.opt.keymap.set
+
+      -- Continue/Start debugging
+      keymap("n", "<leader>dc", dap.continue, { desc = "Debug: Start/Continue" })
+
+      -- Step over
+      keymap("n", "<leader>dso", dap.step_over, { desc = "Debug: Step over" })
+
+      -- Step into
+      keymap("n", "<leader>dsi", dap.step_into, { desc = "Debug: Step into" })
+
+      -- Step out
+      keymap("n", "<leader>dst", dap.step_out, { desc = "Debug: Step out" })
+
+      -- Toggle breakpoint
+      keymap("n", "<leader>db", dap.toggle_breakpoint, { desc = "Debug: Toggle breakpoint" })
+
+      -- Set conditional breakpoint
+      keymap("n", "<leader>dc", function()
+        dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
+      end, { desc = "Debug: Conditional breakpoint" })
+
+      -- Clear all breakpoints
+      keymap("n", "<leader>dx", dap.clear_breakpoints, { desc = "Debug: Clear breakpoints" })
+
+      -- Toggle DAP UI
+      keymap("n", "<leader>du", require("dapup").toggle, { desc = "Debug: Toggle UI" })
+
+      -- Open REPL
+      keymap("n", "<leader>do", dap.repl.open, { desc = "Debug: Open REPL" })
+
+      -- Run last debug configuration
+      keymap("n", "<leader>drl", dap.run_last, { desc = "Debug: Run last" })
+
+      -- Terminate debug session
+      keymap("n", "<leader>dk", dap.terminate, { desc = "Debug: Terminate" })
+
+      -- Restart debug session
+      keymap("n", "<leader>drs", dap.restart, { desc = "Debug: Restart" })
+
     end,
   },
 
