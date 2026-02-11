@@ -10,14 +10,6 @@ set smartindent
 set guicursor=n-v-c:block-Cursor
 set guicursor+=i:ver100-iCursor
 
-call plug#begin('~/.vim/plugged')
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-call plug#end()
-
-set termguicolors
-color andromeda
-
 filetype plugin indent on
 syntax on
 
