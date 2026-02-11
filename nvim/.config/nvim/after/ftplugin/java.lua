@@ -24,7 +24,6 @@ local function get_jdtls_paths()
   local mason = vim.env.HOME .. "/.local/share/nvim/mason"
 
   path.data_dir = vim.fn.stdpath("cache") .. "/jdtls"
-  print("data_dir: " .. path.data_dir)
 
   local jdtls_install = mason .. "/share/jdtls"
 
@@ -149,7 +148,6 @@ local function setup_jdtls()
 
   local path = get_jdtls_paths()
   local data_dir = path.data_dir .. "/" .. vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
-  print("local data_dir: ", data_dir)
 
   if cache_vars.capabilities == nil then
     jdtls.extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
@@ -182,11 +180,6 @@ local function setup_jdtls()
 
     "-data", data_dir,
   }
-  for _, v in ipairs(cmd) do
-    print(v)
-  end
-
-
 
   local lsp_settings = {
     java = {
