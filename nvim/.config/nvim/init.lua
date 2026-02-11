@@ -1,2 +1,1 @@
--- Import Config
-require('dreynolds')
+require('config')
