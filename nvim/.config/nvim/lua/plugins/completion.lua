@@ -19,25 +19,25 @@ return {
 
         mapping = cmp.mapping.preset.insert({
           -- Confirm selection
-          ["<A-y>"] = cmp.mapping.confirm({ select = true }),
+          ["<C-y>"] = cmp.mapping.confirm({ select = true }),
 
           -- Navigate next line
-          ["<A-n>"] = cmp.mapping.select_next_item(),
+          ["<C-n>"] = cmp.mapping.select_next_item(),
 
           -- Navigate prev line
-          ["<A-p>"] = cmp.mapping.select_prev_item(),
+          ["<C-p>"] = cmp.mapping.select_prev_item(),
 
           -- Scroll docs down
-          ["<A-j>"] = cmp.mapping.scroll_docs(4),
+          ["<C-j>"] = cmp.mapping.scroll_docs(4),
 
           -- Scroll docs up
-          ["<A-k>"] = cmp.mapping.scroll_docs(-4),
+          ["<C-k>"] = cmp.mapping.scroll_docs(-4),
 
-          -- Abort/Alose menu
-          ["<A-x>"] = cmp.mapping.abort(),
+          -- Cbort/Alose menu
+          ["<C-x>"] = cmp.mapping.abort(),
 
           -- Trigger completion manually
-          ["<A-c>"] = cmp.mapping.complete(),
+          ["<C-c>"] = cmp.mapping.complete(),
         }),
 
         sources = cmp.config.sources({

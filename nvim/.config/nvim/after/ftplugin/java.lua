@@ -43,27 +43,28 @@ local function get_jdtls_paths()
 
   -- OK TO HERE!
 
- --  local java_test_path = mason .. "/share/java-test"
+  local java_test_path = mason .. "/packages/java-test"
+  print(java_test_path)
 
- --  local java_test_bundle = vim.split(
- --    vim.fn.glob(java_test_path .. "/extension/server/*.jar"),
- --    "\n"
- --  )
+  local java_test_bundle = vim.split(
+    vim.fn.glob(java_test_path .. "/extension/server/*.jar"),
+    "\n"
+  )
 
- --  if java_test_bundle[1] ~= "" then
- --    vim.list_extend(path.bundles, java_test_bundle)
- --  end
+  if java_test_bundle[1] ~= "" then
+    vim.list_extend(path.bundles, java_test_bundle)
+  end
 
- --  local java_debug_path = mason .. "/share/java-debug-adapter"
+  local java_debug_path = mason .. "/packages/java-debug-adapter"
 
- --  local java_debug_bundle = vim.split(
- --    vim.fn.glob(java_debug_path .. "/extension/server/com.microsoft.java.debug.plugin-*.jar"),
- --    "\n"
- --  )
+  local java_debug_bundle = vim.split(
+    vim.fn.glob(java_debug_path .. "/extension/server/com.microsoft.java.debug.plugin-*.jar"),
+    "\n"
+  )
 
- --  if java_debug_bundle[1] ~= "" then
- --    vim.list_extend(path.bundles, java_debug_bundle)
- --  end
+  if java_debug_bundle[1] ~= "" then
+    vim.list_extend(path.bundles, java_debug_bundle)
+  end
 
   path.runtimes = {
     {
@@ -91,12 +92,14 @@ local function enable_codelens(bufnr)
 end
 
 local function enable_debugger(bufnr)
+  require("jdtls").setup_dap({ hotcodereplace = "auto" })
+  require("jdtls.dap").setup_dap_main_class_configs()
 end
 
 local function jdtls_on_attach(client, bufnr)
-  --if features.debugger then
-  --  enable_debugger(bufnr)
-  --end
+  if features.debugger then
+    enable_debugger(bufnr)
+  end
 
   if features.codelens then
     enable_codelens(bufnr)
