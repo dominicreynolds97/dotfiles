@@ -44,7 +44,6 @@ local function get_jdtls_paths()
   -- OK TO HERE!
 
   local java_test_path = mason .. "/packages/java-test"
-  print(java_test_path)
 
   local java_test_bundle = vim.split(
     vim.fn.glob(java_test_path .. "/extension/server/*.jar"),
