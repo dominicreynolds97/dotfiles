@@ -75,12 +75,21 @@ opt.fileencoding = "utf-8"
 -- DIAGNOSTICS
 -- ============================================================================
 
+local severity = vim.diagnostic.severity
+
 vim.diagnostic.config({
   virtual_text = {
-    prefix = "●",
+    prefix = "💥",
     spacing = 4,
   },
-  signs = true,
+  signs = {
+    text = {
+      [severity.ERROR] = "🧨",
+      [severity.WARN] = "⚠️",
+      [severity.HINT] = "📎",
+      [severity.INFO] = "📫",
+    }
+  },
   underline = true,
   update_in_insert = false,
   severity_sort = true,
@@ -91,15 +100,3 @@ vim.diagnostic.config({
     prefix = "",
   }
 })
-
-local signs = {
-  Error = " ",
-  Warn = " ",
-  Hint = " ",
-  Info = " ",
-}
-
-for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end

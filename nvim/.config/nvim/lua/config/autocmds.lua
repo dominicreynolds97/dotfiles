@@ -28,39 +28,16 @@ autocmd("VimResized", {
   end,
 })
 
--- Close certain filetypes with 'q'
-autocmd("FileType", {
-  group = augroup("CloseWithQ", { clear = true }),
-  pattern = { "qf", "help", "man", "lspinfo", "checkhealth" },
-  callback = function()
-    vim.keymap.set("n", "q", ":close<CR>", { buffer = true, silent = true })
-  end,
-})
-
 -- ============================================================================
 -- LSP-SPECIFIC
 -- ============================================================================
 
 -- Format on save
--- autocmd("BufWritePre", {
---   group = augroup("FormatOnSave", { clear = true }),
---   pattern = "*.java",
---   callback = function()
---     vim.lsp.buf.format({ async = false })
---   end,
--- })
-
--- Show line diagnostics on hover
-autocmd("CursorHold", {
-  group = augroup("ShowDiagnostics", { clear = true }),
+autocmd("BufWritePre", {
+  group = augroup("FormatOnSave", { clear = true }),
+  pattern = "*.java",
   callback = function()
-    local opts = {
-      focusable = false,
-      close_events = { "BufLeave", "CursorMoved", "InsertEnter" },
-      border = "rounded",
-      source = "always",
-      prefix = " ",
-    }
+    vim.lsp.buf.format({ async = false })
   end,
 })
 
@@ -74,8 +51,6 @@ autocmd("FileType", {
   pattern = "java",
   callback = function()
     vim.opt_local.colorcolumn = "120"
-    vim.opt_local.shiftwidth = 4
-    vim.opt_local.tabstop = 4
   end,
 })
 

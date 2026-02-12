@@ -47,7 +47,7 @@ require("lazy").setup({
     event = "VeryLazy",
     config = function()
       require("which-key").setup({
-        -- So I don't forget my own mappings
+        preset = "modern",
       })
     end,
   }
