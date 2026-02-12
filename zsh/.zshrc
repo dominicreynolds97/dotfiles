@@ -106,4 +106,6 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias air='$(go env GOPATH)/bin/air'
 
+source "$HOME/.sdkman/bin/sdkman-init.sh"
+
 eval "$(zoxide init zsh)"

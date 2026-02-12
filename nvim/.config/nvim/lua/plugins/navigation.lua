@@ -65,5 +65,10 @@ return {
 
       telescope.load_extension("fzf")
     end,
+  },
+  {
+    "ThePrimeagen/harpoon",
+    branch = "harpoon2",
+    dependencies = { "nvim-lua/plenary.nvim" },
   }
 }
