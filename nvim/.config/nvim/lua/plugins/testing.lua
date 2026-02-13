@@ -11,7 +11,22 @@ return {
     keys = {
       { "<leader>trn", function() require("neotest").run.run() end, desc = "Test: Run nearest" },
       { "<leader>trf", function() require("neotest").run.run(vim.fn.expand("%")) end, desc = "Test: Run file" },
-      { "<leader>tra", function() require("neotest").run.run(vim.fn.getcwd()) end, desc = "Test: Run all" },
+      {
+        "<leader>tra",
+        function()
+          local root = vim.fs.root(0, { "pom.xml", ".git" })
+          require("neotest").run.run(root)
+        end,
+        desc = "Test: Run all"
+      },
+      {
+        "<leader>trm",
+        function()
+          local root = vim.fs.root(0, { "pom.xml" })
+          require("neotest").run.run(root)
+        end,
+        desc = "Test: Run module"
+      },
       { "<leader>td", function() require("neotest").run.run({ strategy = "dap" }) end, desc = "Test: Debug nearest" },
       { "<leader>tx", function() require("neotest").run.stop() end, desc = "Test: Stop" },
       { "<leader>ts", function() require("neotest").summary.toggle() end, desc = "Test: Toggle summary" },
@@ -25,6 +40,7 @@ return {
         adapters = {
           require("neotest-java")({
             ignore_wrapper = false,
+            junit_jar = vim.fn.expand("~/.local/share/nvim/neotest-java/junit-platform-console-standalone-1.10.1.jar"),
           }),
         },
 

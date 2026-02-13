@@ -2,7 +2,7 @@ require("lazy").setup({
   { import = "plugins.lsp" },
   { import = "plugins.completion" },
   { import = "plugins.dap" },
-  { import = "plugins.testing" },
+  --  { import = "plugins.testing" },
   { import = "plugins.navigation" },
   { import = "plugins.ui" },
   { import = "plugins.git" },

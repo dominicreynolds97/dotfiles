@@ -140,7 +140,19 @@ local function jdtls_on_attach(client, bufnr)
   keymap("n", "<leader>tc", jdtls.test_class, opts("Test class"))
 
   -- Test nearest method
-  keymap("n", "<leader>tm", jdtls.test_nearest_method, opts("Test nearest method"))
+  keymap("n", "<leader>tn", jdtls.test_nearest_method, opts("Test nearest method"))
+
+  -- Test module
+  keymap("n", "<leader>tm", function()
+    local root = vim.fs.root(0, { "pom.xml" })
+    jdtls.test_class({ project = root })
+  end, opts("Test module"))
+
+  -- Test repo
+  keymap("n", "<leader>tr", function()
+    local root = vim.fs.root(0, { ".git" })
+    jdtls.test_class({ project = root })
+  end, opts("Test repository"))
 end
 
 local function setup_jdtls()
@@ -149,7 +161,8 @@ local function setup_jdtls()
   extendedClientCapabilities.onCompletionItemSelectedCommand = "editor.action.triggerParameterHints"
 
   local path = get_jdtls_paths()
-  local data_dir = path.data_dir .. "/" .. vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
+  local root_dir = vim.fs.root(0, root_files)
+  local data_dir = path.data_dir .. "/" .. vim.fn.fnamemodify(root_dir, ":p:h:t")
 
   if cache_vars.capabilities == nil then
     jdtls.extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
@@ -229,7 +242,7 @@ local function setup_jdtls()
     settings = lsp_settings,
     on_attach = jdtls_on_attach,
     capabilites = cache_vars.capabilites,
-    root_dir = vim.fs.root(0, root_files),
+    root_dir = root_dir,
     flags = {
       allow_incremental_sync = true,
     },
