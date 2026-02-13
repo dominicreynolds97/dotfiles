@@ -145,12 +145,14 @@ local function jdtls_on_attach(client, bufnr)
   -- Test module
   keymap("n", "<leader>tm", function()
     local root = vim.fs.root(0, { "pom.xml" })
+    print(root)
     jdtls.test_class({ project = root })
   end, opts("Test module"))
 
   -- Test repo
   keymap("n", "<leader>tr", function()
     local root = vim.fs.root(0, { ".git" })
+    print(root)
     jdtls.test_class({ project = root })
   end, opts("Test repository"))
 end
@@ -163,6 +165,16 @@ local function setup_jdtls()
   local path = get_jdtls_paths()
   local root_dir = vim.fs.root(0, root_files)
   local data_dir = path.data_dir .. "/" .. vim.fn.fnamemodify(root_dir, ":p:h:t")
+  local format = {
+      enabled = true,
+  }
+  local google_style_location = root_dir .. "/googlestyle.xml"
+  if vim.fn.filereadable(google_style_location) then
+    format.settings = {
+      url = google_style_location,
+      profile = "GoogleStyle",
+    }
+  end
 
   if cache_vars.capabilities == nil then
     jdtls.extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
@@ -207,7 +219,7 @@ local function setup_jdtls()
       implementaionsCodeLens = { enabled = false },
       referencesCodeLens = { enabled = false },
       references = { includeDecompiledSources = true },
-      format = { enabled = true },
+      format = format,
       signatureHelp = { enabled = true },
     },
     completion = {
