@@ -45,7 +45,10 @@ local function cycleFocusedApp()
   if not app then return end
 
   local wins = app:allWindows()
-  if #wins < 2 then return end
+  if #wins < 2 then
+    hs.alert.show("No additional windows")
+    return
+  end
 
   table.sort(wins, function(a, b) return a:id() < b:id() end)
 
