@@ -62,9 +62,9 @@ local function cycleFocusedApp()
 end
 
 local function loadWindowBindings()
-  hs.hotkey.bind({"cmd", "alt", "ctrl"}, "F", toggleFullscreen)
-  hs.hotkey.bind({"cmd", "alt", "ctrl"}, "M", maximize)
-  hs.hotkey.bind({"cmd", "alt", "ctrl"}, "C", cycleFocusedApp)
+  hs.hotkey.bind(mods.windows, "F", toggleFullscreen)
+  hs.hotkey.bind(mods.windows, "M", maximize)
+  hs.hotkey.bind(mods.windows, "C", cycleFocusedApp)
 
   for key, dir in pairs(bindings.directions) do
     hs.hotkey.bind(mods.windows, key, function() moveToScreen(dir) end)

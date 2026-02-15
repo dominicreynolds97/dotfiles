@@ -1,6 +1,7 @@
 require("modules.apps")
 require("modules.windows")
 require("modules.splits")
+require("modules.harpspoon")
 
 hs.window.animationDuration = 0
 

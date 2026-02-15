@@ -14,6 +14,7 @@ local function focusApp(appName)
   end
 end
 
+
 local function loadAppBindings()
   for key, appName in pairs(bindings.apps) do
     hs.hotkey.bind(mods.apps, key, function() focusApp(appName) end)
