@@ -15,6 +15,7 @@ return {
           "jdtls",
           "lua_ls",
           "clangd",
+          "rust_analyzer",
         },
       })
     end
