@@ -14,6 +14,7 @@ return {
         ensure_installed = {
           "jdtls",
           "lua_ls",
+          "clangd",
         },
       })
     end
@@ -40,17 +41,23 @@ return {
     config = function()
       local lspconfig = vim.lsp.config
       --local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-      lspconfig("lua_ls", {
         --capabilities = capabilites,
+      local luaConf = {
         settings = {
           Lua = {
-            diagnostics = { globals = { "vim" } },
-            workspace = vim.api.nvim_get_runtime_file("", true),
+            diagnostics = { globals = { "vim", "hs" } },
+            runtime = {
+              version = "Lua 5.4",
+            },
+            workspace = {
+              library = vim.fn.expand("~/.hammerspoon/stubs"),
+            },
             checkThirdParty = false,
           }
         }
-      })
+      }
+
+      lspconfig("lua_ls", luaConf)
 
       vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(args)

@@ -109,3 +109,6 @@ alias air='$(go env GOPATH)/bin/air'
 source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 eval "$(zoxide init zsh)"
+export PATH="/opt/homebrew/opt/bison/bin:$PATH"
+export PATH="/opt/homebrew/opt/flex/bin:$PATH"
+export PATH="/opt/homebrew/opt/make/libexec/gnubin:$PATH"
