@@ -108,16 +108,22 @@ alias air='$(go env GOPATH)/bin/air'
 
 source "$HOME/.sdkman/bin/sdkman-init.sh"
 
+export DOCKER_HOST=unix://${HOME}/.colima/default/docker.sock
+export TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE=/var/run/docker.sock
+export TESTCONTAINERS_HOST_OVERRIDE=$(colima ls -j | jq -r '.address | select(. != null) | limit(1; .)')
+
+alias rgr="~/bin/rgr"
+
 eval "$(zoxide init zsh)"
 export PATH="/opt/homebrew/opt/bison/bin:$PATH"
 export PATH="/opt/homebrew/opt/flex/bin:$PATH"
 export PATH="/opt/homebrew/opt/make/libexec/gnubin:$PATH"
+
 export ANDROID_HOME="$HOME/Library/Android/sdk"
 export PATH="$ANDROID_HOME/emulator:$ANDROID_HOME/platform-tools:$PATH"
 
-# Colima (not Docker Desktop): point Testcontainers/docker clients at the Colima socket, and
-# disable Ryuk (Testcontainers' cleanup sidecar) since its privileged/socket-mount requirements
-# aren't reliable on Colima's VM. Needed for King-of-the-court's backend repository tests
-# (./gradlew test in backend/).
-export DOCKER_HOST="unix://$HOME/.colima/default/docker.sock"
-export TESTCONTAINERS_RYUK_DISABLED=true
+export PATH="$HOME/.local/bin:$PATH"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

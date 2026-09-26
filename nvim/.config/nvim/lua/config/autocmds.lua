@@ -33,13 +33,13 @@ autocmd("VimResized", {
 -- ============================================================================
 
 -- Format on save
-autocmd("BufWritePre", {
-  group = augroup("FormatOnSave", { clear = true }),
-  pattern = "*.java",
-  callback = function()
-    vim.lsp.buf.format({ async = false })
-  end,
-})
+--  autocmd("BufWritePre", {
+--    group = augroup("FormatOnSave", { clear = true }),
+--    pattern = "*.java",
+--    callback = function()
+--      vim.lsp.buf.format({ async = false })
+--    end,
+--  })
 
 -- ============================================================================
 -- JAVA-SPECIFIC

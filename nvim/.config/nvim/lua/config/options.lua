@@ -1,3 +1,11 @@
+-- Compatibility shim for Neovim 0.11+ (Telescope 0.1.x fix)
+if not vim.treesitter.ft_to_lang then
+  vim.treesitter.ft_to_lang = function(ft)
+    local success, lang = pcall(vim.treesitter.language.get_lang, ft)
+    return success and lang or ft
+  end
+end
+
 local opt = vim.opt
 
 -- UI / Visual Feedback
@@ -54,7 +62,7 @@ opt.shortmess:append("c")
 
 -- Folding (Treesitter based)
 opt.foldmethod = "expr"
-opt.foldexpr = "nvm_treesitter#foldexpr()"
+opt.foldexpr = "nvim_treesitter#foldexpr()"
 opt.foldenable = false
 opt.foldlevel = 99
 

@@ -21,14 +21,14 @@ local function get_jdtls_paths()
   end
 
   local path = {}
-  local mason = vim.env.HOME .. "/.local/share/nvim/mason"
+  local mason = vim.fn.stdpath("data") .. "/mason"
 
   path.data_dir = vim.fn.stdpath("cache") .. "/jdtls"
 
-  local jdtls_install = mason .. "/share/jdtls"
+  local jdtls_install = mason .. "/packages/jdtls"
 
   path.java_agent = jdtls_install .. "/lombok.jar"
-  path.launcher_jar = vim.fn.glob(jdtls_install .. "/plugins/org.eclipse.equinox.launcher.jar")
+  path.launcher_jar = vim.fn.glob(jdtls_install .. "/plugins/org.eclipse.equinox.launcher_*.jar")
 
   path.os_config = "linux"
   if vim.fn.has("mac") == 1 then
@@ -69,6 +69,18 @@ local function get_jdtls_paths()
     {
       name = "JavaSE-21",
       path = vim.fn.expand("~/.sdkman/candidates/java/21.0.7-amzn")
+    },
+    {
+      name = "JavaSE-17",
+      path = vim.fn.expand("~/.sdkman/candidates/java/17.0.15-amzn")
+    },
+    {
+      name = "JavaSE-11",
+      path = vim.fn.expand("~/.sdkman/candidates/java/11.0.30-amzn")
+    },
+    {
+      name = "JavaSE-1.8",
+      path = vim.fn.expand("~/.sdkman/candidates/java/8.0.462-amzn")
     },
   }
 
@@ -163,7 +175,7 @@ local function setup_jdtls()
   extendedClientCapabilities.onCompletionItemSelectedCommand = "editor.action.triggerParameterHints"
 
   local path = get_jdtls_paths()
-  local root_dir = vim.fs.root(0, root_files)
+  local root_dir = vim.fs.root(0, { ".git" }) or vim.fs.root(0, root_files)
   local data_dir = path.data_dir .. "/" .. vim.fn.fnamemodify(root_dir, ":p:h:t")
   local format = {
       enabled = true,
@@ -179,12 +191,12 @@ local function setup_jdtls()
   if cache_vars.capabilities == nil then
     jdtls.extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
 
-   -- local ok_cmp, cmp_lsp = pcall(require, "cmp_nvim_lsp")
-   -- cache_vars.capabilites = vim.tbl_deep_extend(
-   --   "force",
-   --   vim.lsp.protocol.make_client_capabilites(),
-   --   ok_cmp and cmp_lsp.default_capabilites() or {}
-   -- )
+   local ok_cmp, cmp_lsp = pcall(require, "cmp_nvim_lsp")
+   cache_vars.capabilities = vim.tbl_deep_extend(
+     "force",
+     vim.lsp.protocol.make_client_capabilities(),
+     ok_cmp and cmp_lsp.default_capabilities() or {}
+   )
   end
 
   local cmd = {
@@ -192,11 +204,11 @@ local function setup_jdtls()
 
     "-Declipse.application=org.eclipse.jdt.ls.core.id1",
     "-Dosgi.bundles.defaultStartLevel=4",
-    "-Declipse.profuct=org.eclipse.jdt.ls.core.product",
+    "-Declipse.product=org.eclipse.jdt.ls.core.product",
     "-Dlog.protocol=true",
     "-Dlog.level=ALL",
     "-javaagent:" .. path.java_agent,
-    "-Xmx1g",
+    "-Xmx4g",
     "--add-modules=ALL-SYSTEM",
     "--add-opens", "java.base/java.util=ALL-UNNAMED",
     "--add-opens", "java.base/java.lang=ALL-UNNAMED",
@@ -216,7 +228,7 @@ local function setup_jdtls()
         --runtimes = path.runtimes,
       },
       maven = { downloadSources = true },
-      implementaionsCodeLens = { enabled = false },
+      implementationsCodeLens = { enabled = false },
       referencesCodeLens = { enabled = false },
       references = { includeDecompiledSources = true },
       format = format,
@@ -253,7 +265,7 @@ local function setup_jdtls()
     cmd = cmd,
     settings = lsp_settings,
     on_attach = jdtls_on_attach,
-    capabilites = cache_vars.capabilites,
+    capabilities = cache_vars.capabilities,
     root_dir = root_dir,
     flags = {
       allow_incremental_sync = true,

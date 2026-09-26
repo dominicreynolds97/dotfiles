@@ -14,5 +14,7 @@ return {
     V = "Surfshark",
     W = "WhatsApp",
     D = "REAPER",
+    M = "Symphony",
+    I = "IntelliJ"
   }
 }
