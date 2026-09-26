@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 killall -q polybar
+while pgrep -x polybar >/dev/null; do sleep 0.1; done
 
 # Find this machine's CPU temperature sensor (AMD: k10temp, Intel: coretemp)
 for hwmon in /sys/class/hwmon/hwmon*; do
