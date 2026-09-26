@@ -4,7 +4,6 @@ bluez-utils
 brightnessctl
 debugedit
 discord
-dmenu
 fakeroot
 feh
 gamemode
@@ -45,6 +44,7 @@ pipewire-pulse
 playerctl
 polkit-kde-agent
 polybar
+rofi
 steam
 stow
 sudo
