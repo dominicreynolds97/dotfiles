@@ -1,4 +1,5 @@
 base
+base-devel
 bluez
 bluez-utils
 brightnessctl
@@ -14,8 +15,8 @@ git
 greetd
 greetd-tuigreet
 i3-wm
-i3lock
 i3status
+imagemagick
 iw
 keyd
 kitty
@@ -61,5 +62,6 @@ wireplumber
 xclip
 xorg-server
 xorg-xinit
+xss-lock
 zoxide
 zsh

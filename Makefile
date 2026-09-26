@@ -1,11 +1,11 @@
 COMMON = nvim tmux git zsh vim
 MAC = hammerspoon
 ARCH = i3 dunst gtk kitty mangohud picom polybar rofi xinit
-ARCH_ROOT = keyd
+ARCH_ROOT = keyd greetd
 
 stow_dirs = $(filter-out $(addsuffix /,$(ARCH_ROOT)),$(wildcard */))
 
-.PHONY : stow-mac stow-arch stow-arch-root restow-mac restow-arch restow-arch-root install-arch dump-arch delete delete-arch-root
+.PHONY : stow-mac stow-arch stow-arch-root restow-mac restow-arch restow-arch-root install-arch dump-arch delete delete-arch-root install-root-copies
 
 stow-mac :
 	stow --target $(HOME) --verbose $(COMMON) $(MAC)
@@ -13,9 +13,17 @@ stow-mac :
 stow-arch :
 	stow --target $(HOME) --verbose $(COMMON) $(ARCH)
 
-stow-arch-root :
-	sudo stow --target / --no-folding --verbose $(ARCH_ROOT)
+# Copied, not stowed: the greeter user can't follow symlinks into $(HOME).
+ROOT_COPIES = /etc/greetd/greeter.sh
+STOW_ROOT = sudo stow --target / --no-folding --verbose --ignore='greeter\.sh'
+
+install-root-copies :
+	sudo install -Dm755 greetd/etc/greetd/greeter.sh /etc/greetd/greeter.sh
+
+stow-arch-root : install-root-copies
+	$(STOW_ROOT) $(ARCH_ROOT)
 	sudo systemctl enable --now keyd
+	sudo systemctl enable greetd
 
 restow-mac:
 	stow --target $(HOME) --verbose --restow $(COMMON) $(MAC)
@@ -23,8 +31,8 @@ restow-mac:
 restow-arch:
 	stow --target $(HOME) --verbose --restow $(COMMON) $(ARCH)
 
-restow-arch-root :
-	sudo stow --target / --no-folding --verbose --restow $(ARCH_ROOT)
+restow-arch-root : install-root-copies
+	$(STOW_ROOT) --restow $(ARCH_ROOT)
 	sudo keyd reload
 
 install-arch :
@@ -39,4 +47,5 @@ delete :
 	stow --target $(HOME) --verbose --delete $(stow_dirs)
 
 delete-arch-root :
-	sudo stow --target / --verbose --delete $(ARCH_ROOT)
+	$(STOW_ROOT) --delete $(ARCH_ROOT)
+	sudo rm -f $(ROOT_COPIES)
