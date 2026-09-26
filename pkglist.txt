@@ -4,6 +4,7 @@ bluez-utils
 brightnessctl
 debugedit
 discord
+dunst
 fakeroot
 feh
 gamemode
@@ -25,6 +26,7 @@ linux
 linux-firmware
 linux-headers
 lutris
+maim
 make
 mangohud
 mesa
@@ -56,6 +58,7 @@ vulkan-icd-loader
 vulkan-tools
 which
 wireplumber
+xclip
 xorg-server
 xorg-xinit
 zoxide

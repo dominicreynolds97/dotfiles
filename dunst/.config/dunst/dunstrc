@@ -1,0 +1,45 @@
+# Notifications, themed to match polybar and rofi. See `man 5 dunst`.
+
+[global]
+    # Top right, under polybar (8px offset + 28px bar + 6px gap)
+    origin = top-right
+    offset = (8, 42)
+    width = 350
+    notification_limit = 5
+
+    font = JetBrainsMono Nerd Font 10
+    format = "<b>%s</b>\n%b"
+    alignment = left
+    word_wrap = yes
+    ellipsize = end
+
+    padding = 12
+    horizontal_padding = 14
+    gap_size = 6
+    corner_radius = 15
+    frame_width = 0
+    separator_height = 0
+
+    icon_position = left
+    min_icon_size = 32
+    max_icon_size = 48
+
+    # Left click opens, middle does the action, right dismisses all
+    mouse_left_click = do_action, close_current
+    mouse_middle_click = do_action, close_current
+    mouse_right_click = close_all
+
+[urgency_low]
+    background = "#01122bcc"
+    foreground = "#565f89"
+    timeout = 5
+
+[urgency_normal]
+    background = "#01122bcc"
+    foreground = "#c0caf5"
+    timeout = 8
+
+[urgency_critical]
+    background = "#be2422cc"
+    foreground = "#c0caf5"
+    timeout = 0
