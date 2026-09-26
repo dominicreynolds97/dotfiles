@@ -14,7 +14,7 @@ set -- $(xrandr --query | awk '
     out && /^[^ ]/ { exit }
     out && /\+/ && !mode {
         mode = $1
-        for (i = 2; i <= NF; i++) { r = $i; gsub(/[*+]/, "", r); if (r + 0 > max) max = r }
+        for (i = 2; i <= NF; i++) { r = $i; gsub(/[*+]/, "", r); if (r + 0 > max) max = r + 0 }
     }
     END { print out, mode, max }')
 [ $# -eq 3 ] && xrandr --output "$1" --mode "$2" --rate "$3"
