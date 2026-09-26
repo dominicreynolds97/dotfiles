@@ -1,6 +1,6 @@
 COMMON = nvim tmux git zsh vim
 MAC = hammerspoon
-ARCH = i3 i3status mangohud xinit
+ARCH = i3 mangohud picom polybar xinit
 ARCH_ROOT = keyd
 
 stow_dirs = $(filter-out $(addsuffix /,$(ARCH_ROOT)),$(wildcard */))

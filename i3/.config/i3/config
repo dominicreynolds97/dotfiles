@@ -13,15 +13,28 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:monospace 8
+font pango:JetBrainsMono Nerd Font 9
 
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-#font pango:DejaVu Sans Mono 8
+# Small title bars with no borders
+default_border normal 0
+default_floating_border normal 0
+title_align left
+# Leading space pads the title off the left edge
+for_window [all] title_format " %title"
+
+# Title bars blend into the bar colour; focus is shown by brighter text
+# class                 border  bg      text    indicator child_border
+client.focused          #01122b #01122b #c0caf5 #01122b   #01122b
+client.focused_inactive #01122b #01122b #565f89 #01122b   #01122b
+client.unfocused        #01122b #01122b #565f89 #01122b   #01122b
+client.urgent           #be2422 #be2422 #c0caf5 #be2422   #be2422
 
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
 exec --no-startup-id dex --autostart --environment i3
+
+# Compositor, for rounded corners
+exec --no-startup-id picom
 
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
@@ -35,11 +48,10 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 
 # Use pactl to adjust volume in PulseAudio.
-set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -165,21 +177,5 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-bar {
-        status_command i3status
-        font pango:JetBrainsMono Nerd Font 9
-        separator_symbol "|"
-        position top
-        colors {
-                background #01122b
-                statusline #c0caf5
-                separator  #2e2e2e
-                #                  border  bg      text
-                focused_workspace  #7aa2f7 #7aa2f7 #1a1b26
-                active_workspace   #414868 #414868 #c0caf5
-                inactive_workspace #1a1b26 #1a1b26 #565f89
-                urgent_workspace   #be2422 #be2422 #c0caf5
-        }
-}
+# Status bar
+exec_always --no-startup-id ~/.config/polybar/launch.sh
