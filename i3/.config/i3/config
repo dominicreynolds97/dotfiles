@@ -15,9 +15,9 @@ set $mod Mod4
 # is used in the bar {} block below.
 font pango:JetBrainsMono Nerd Font 10
 
-# Small title bars with no borders
-default_border normal 0
-default_floating_border normal 0
+# No title bars or borders (tabbed/stacked layouts still show titles)
+default_border pixel 0
+default_floating_border pixel 0
 title_align left
 # Leading space pads the title off the left edge
 for_window [all] title_format " %title"
@@ -41,6 +41,9 @@ exec --no-startup-id dex --autostart --environment i3
 
 # Compositor, for rounded corners
 exec --no-startup-id picom
+
+# Wallpaper
+exec_always --no-startup-id feh --no-fehbg --bg-fill ~/Pictures/wallpaper-1.webp
 
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
