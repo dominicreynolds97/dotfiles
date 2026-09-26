@@ -22,6 +22,7 @@ require("lazy").setup({
           "json",
           "jaml",
           "xml",
+          "kotlin",
         },
         autoinstall = true,
         highlight = { enable = true },

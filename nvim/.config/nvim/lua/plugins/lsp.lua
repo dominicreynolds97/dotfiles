@@ -15,7 +15,8 @@ return {
           "jdtls",
           "lua_ls",
           "clangd",
-          "rust_analyzer",
+          "rust-analyzer",
+          "kotlin_language_server",
         },
       })
     end
