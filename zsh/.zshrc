@@ -121,3 +121,6 @@ case "$(uname)" in
   Darwin) [ -f "$HOME/.zshrc.darwin" ] && source "$HOME/.zshrc.darwin" ;;
   Linux)  [ -f "$HOME/.zshrc.linux" ]  && source "$HOME/.zshrc.linux" ;;
 esac
+
+source "$HOME/zsh/env.zsh"
+source "$HOME/zsh/eof.zsh"
